@@ -1,6 +1,7 @@
 """Models for Blogly."""
-
+import datetime
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import Column, Integer, DateTime
 from flask_debugtoolbar import DebugToolbarExtension
 
 db = SQLAlchemy()
@@ -27,4 +28,22 @@ class User(db.Model):
     last_name = db.Column(db.String(50),
                      nullable=False)
     image_url = db.Column(db.String(), nullable=False, default = default_image)
-    
+
+    posts = db.relationship("Post")
+
+class Post(db.Model):
+    '''Posts'''
+    __tablename__ = "posts"
+
+    id = db.Column(db.Integer,
+                   primary_key=True,
+                   autoincrement=True)
+    title = db.Column(db.String(50),
+                     nullable=False)
+    content = db.Column(db.String(350),
+                     nullable=False)
+    created_at = db.Column(DateTime, 
+                     default=datetime.datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    user= db.relationship('User')

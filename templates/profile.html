@@ -13,4 +13,17 @@ User Profile
 <form action="/users/{{user.id}}/delete" method="POST">
     <button id="btn_del">Delete</button>
 </form>
+<h2>Posts</h2>
+<ul>
+    {% for post in user.posts %}
+    <li>
+        <a href="/posts/{{post.id}}">{{post.title}}</a>
+    </li>
+    {% endfor %}
+</ul>
+<p>
+    <a href="/users/{{user.id}}/posts/new">Add Post</a>
+</p>
+
+
 {% endblock %}
