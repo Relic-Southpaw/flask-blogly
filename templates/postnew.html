@@ -14,6 +14,13 @@ New Post
     </p>
     <textarea type="text" name="content" style="height: 100px; width: 400px;">
         </textarea>
+
+    {% for tag in tags%}
+    <p>
+        <input type="checkbox" name="tagged" id="{{tag.id}}" value="{{tag.id}}"> {{tag.name}}
+    </p>
+    {%endfor%}
+
     <p>
         <a href="/users/{{user.id}}" class="button">Cancel</a>
         <button> Add</button>
